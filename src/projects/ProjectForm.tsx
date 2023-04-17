@@ -52,19 +52,25 @@ function ProjectForm({ project: initialProject, onSave, onCancel }: ProjectFormP
   };
 
   function validate(project: Project) {
+
     let errors: any = { name: '', description: '', budget: '' };
+
     if (project.name.length === 0) {
       errors.name = 'Name is required';
     }
+
     if (project.name.length > 0 && project.name.length < 3) {
       errors.name = 'Name needs to be at least 3 characters.';
     }
+
     if (project.description.length === 0) {
       errors.description = 'Description is required.';
     }
+
     if (project.budget === 0) {
       errors.budget = 'Budget must be more than $0.';
     }
+    
     return errors;
   }
     
