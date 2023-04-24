@@ -64,11 +64,17 @@ function ProjectsPage() {
   const saveProject = (project: Project) => {
     console.log('Saving project: ', project);
 
-    let updatedProjects = projects.map((p: Project) => {
-      return p.id === project.id ? project : p;
-    });
-
-    setProjects(updatedProjects);
+    projectAPI.put(project).then((updatedProject) => {
+        let updatedProjects = projects.map((p: Project) => {
+          return p.id === project.id ? new Project(updatedProject) : p;
+        });
+        setProjects(updatedProjects);
+      }).catch((e) => {
+         if (e instanceof Error) {
+          setError(e.message);
+         }
+      });
+    
   };
 
   return (
